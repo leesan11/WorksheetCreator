@@ -23703,7 +23703,7 @@ function _applyDecoratedDescriptor$1(target, property, decorators, descriptor, c
 }
 try {
     var iconv = function () {
-            throw new Error('Cannot find module \'iconv-lite\' from \'C:\\Users\\SangMoo\\Desktop\\Open Source Projects\\Testing pdf\\node_modules\\fontkit\'');
+            throw new Error('Cannot find module \'iconv-lite\' from \'C:\\Users\\SangMoo\\Desktop\\Testing pdf\\node_modules\\fontkit\'');
         }();
 } catch (err) {
 }
@@ -55122,7 +55122,7 @@ if (hadRuntime) {
     var DecodeStream, iconv;
     try {
         iconv = function () {
-            throw new Error('Cannot find module \'iconv-lite\' from \'C:\\Users\\SangMoo\\Desktop\\Open Source Projects\\Testing pdf\\node_modules\\restructure\\src\'');
+            throw new Error('Cannot find module \'iconv-lite\' from \'C:\\Users\\SangMoo\\Desktop\\Testing pdf\\node_modules\\restructure\\src\'');
         }();
     } catch (_error) {
     }
@@ -55229,7 +55229,7 @@ if (hadRuntime) {
     DecodeStream = require('./DecodeStream');
     try {
         iconv = function () {
-            throw new Error('Cannot find module \'iconv-lite\' from \'C:\\Users\\SangMoo\\Desktop\\Open Source Projects\\Testing pdf\\node_modules\\restructure\\src\'');
+            throw new Error('Cannot find module \'iconv-lite\' from \'C:\\Users\\SangMoo\\Desktop\\Testing pdf\\node_modules\\restructure\\src\'');
         }();
     } catch (_error) {
     }
@@ -56757,96 +56757,128 @@ module.exports = UnicodeTrie;
 
 },{"tiny-inflate":263}],267:[function(require,module,exports){
 document.getElementById("createWorksheet").addEventListener("click",function(){
-let pdfKIT = require("pdfkit");
-let fs = require("fs");
-let blobStream  = require('blob-stream');
-window.numb=0;
-window.store=[];
-let doc = new pdfKIT();
-let stream = doc.pipe(blobStream())
-//adding content
-//TO DO: Add to MTFTW website somehow...
-//template
-doc.fontSize(20).text("Ordering Decimals Worksheet",{
-  align:"center",
-  underline:true,
-  height:300,
-
-});
-
-doc.fontSize(14).moveDown();
-doc.fontSize(14).text("Name:______________                                       Date:_______________");
-doc.moveDown().moveDown();
-//Template end
-doc.fontSize(12);
-doc.text("Order from Least to Greatest");
-for(let i=0;i<10;i++){
-  appendQuestion();
-}
-//add a border
-doc.rect(10,10,590,770).stroke();
-
-createAnswerKey();
-
-function appendQuestion(){
-  let arr=createQuestion();
-  (window.store).push(arr);
-  doc.fillColor("black");
-  doc.text(arr[0],{
-  });
-  doc.fillColor("white")
-  doc.text(arr[1],{
-  })
-  doc.moveDown();
-}
-
-function createQuestion(){
-let arr=[];
-for(i=0;i<5;i++){
-  arr.push((Math.random()).toFixed(2));
-}
-window.numb++;
-return  ["\n"+window.numb+") "+arr.join(" ,"),createAnswer(arr)+"\n"];
-
-}
-
-function createAnswer(arr){
-  let t=[];
-  for(items of arr){
-    t.push(items);
-  }
-  t.sort((a,b)=>{return b-a});
-  return "Answer: "+window.numb+") "+t.join(" ,");
-}
-
-function createAnswerKey(){
-  doc.fillColor("black");
-  doc.addPage();
-  doc.fontSize(20).text("Answer Key",{
-    align:"center",
-    underline:true,
-  });
-  doc.fontSize(12);
-  for(items of window.store){
-    doc.fillColor("black");
-    doc.text(items[0]);
-    doc.moveDown();
-    doc.fillColor("red");
-    doc.text(items[1]);
-  }
-
-}
-//add a border
-doc.rect(10,10,590,770).stroke();
-
-
-// finalize the PDF and end the stream
-doc.end();
-
-stream.on('finish', function(){
+  let pdfKIT = require("pdfkit");
+  let doc = new pdfKIT();
+  let fs = require("fs");
+  let blobStream  = require('blob-stream');
+  let template = require("./template.js");
+  window.numb=0;
+  window.store=[];
+  let stream = doc.pipe(blobStream());
   
-  url = stream.toBlobURL('application/pdf')
-  document.getElementById("i").src=url;
-});
-});
-},{"blob-stream":76,"fs":1,"pdfkit":223}]},{},[267]);
+  //adding content
+  //TO DO: Add to MTFTW website somehow...
+  //template
+  
+  template.createTitle(doc,"Ordering Decimals Worksheet");
+  
+  template.addNameDate(doc);
+  //Template end
+  doc.fontSize(12);
+  doc.text("Order from Least to Greatest");
+  for(let i=0;i<10;i++){
+    appendQuestion();
+  }
+  //add a logo
+  template.addLogo(doc);
+  //add a border
+  template.addBorder(doc);
+  
+  createAnswerKey();
+  template.addLogo(doc);
+  
+  //add a border
+  template.addBorder(doc);
+  
+  function appendQuestion(){
+    let arr=createQuestion();
+    (window.store).push(arr);
+    doc.fillColor("black");
+    doc.text(arr[0],{
+    });
+    doc.fillColor("white")
+    doc.text(arr[1],{
+    })
+    doc.moveDown();
+  }
+  
+  function createQuestion(){
+  let arr=[];
+  for(i=0;i<5;i++){
+    arr.push((Math.random()).toFixed(2));
+  }
+  window.numb++;
+  return  ["\n"+window.numb+") "+arr.join(" ,"),createAnswer(arr)+"\n"];
+  
+  }
+  
+  function createAnswer(arr){
+    let t=[];
+    for(items of arr){
+      t.push(items);
+    }
+    t.sort((a,b)=>{return b-a});
+    return "Answer: "+t.join(" ,");
+  }
+  
+  function createAnswerKey(){
+    doc.fillColor("black");
+    doc.addPage();
+    doc.fontSize(20).text("Answer Key",{
+      align:"center",
+      underline:true,
+    });
+    doc.fontSize(12);
+    for(items of window.store){
+      doc.fillColor("black");
+      doc.text(items[0]);
+      doc.moveDown();
+      doc.fillColor("red");
+      doc.text(items[1]);
+    };
+  
+  };
+ 
+  // finalize the PDF and end the stream
+  doc.end();
+  
+  stream.on('finish', function(){
+    
+    url = stream.toBlobURL('application/pdf')
+    document.getElementById("i").src=url;
+  });
+  });
+},{"./template.js":268,"blob-stream":76,"fs":1,"pdfkit":223}],268:[function(require,module,exports){
+let template = {
+
+    createTitle : function(doc,title){
+        doc.fontSize(20).text(title,{
+            align:"center",
+            underline:true,
+            height:300,
+          });
+    },
+
+    addNameDate : function(doc){
+        doc.fontSize(14).moveDown();
+      doc.fontSize(14).text("Name:______________                                       Date:_______________");
+      doc.moveDown().moveDown();
+      doc.fontSize(12);
+    },
+
+    addBorder : function(doc){
+        doc.rect(10,10,590,770).stroke();
+    },
+
+    addLogo : function(doc){
+        doc.fontSize(6);
+        doc.fillColor("grey");
+        doc.text("Copyright SL",500,700,{
+            lineBreak:false
+    });
+    }
+
+};
+
+module.exports = template;
+},{}]},{},[267]);
