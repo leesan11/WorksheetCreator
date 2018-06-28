@@ -56756,7 +56756,7 @@ UnicodeTrie = (function() {
 module.exports = UnicodeTrie;
 
 },{"tiny-inflate":263}],267:[function(require,module,exports){
-document.getElementById("createWorksheet").addEventListener("click",function(){
+$(".generate").on("click",".create-worksheet",function(){
   let pdfKIT = require("pdfkit");
   let doc = new pdfKIT();
   let fs = require("fs");
