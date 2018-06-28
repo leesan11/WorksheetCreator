@@ -5,22 +5,68 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
 
 </head>
-<body>
-    <div class="container">
-    <div class="row">
-    <div class="col s3" style="height:100vh">
-        <h4>Click below to create a worksheet</h4>
-        <button class="btn-large create-worksheet" id="createWorksheet">Create!</button>
-    </div>
 
-    <div class="col s9" style="height:100vh">
-    <iframe id="i" style="height:90%;width:100%"></iframe>
+<body>
+    <nav>
+        <div class="nav-wrapper black">
+            <a href="#!" class="center brand-logo">DIY Worksheets</a>
+            <ul class="left">
+                <li>
+                    <a data-target="slide-out" class="show-on-large sidenav-trigger black waves-effect waves-light btn"><i class="black material-icons">create</i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <ul id="slide-out" class="sidenav">
+        <li><a href="#!">Grade 1</a></li>
+        <li><div class="divider"></div></li>
+      <li><a href="#!">Grade 2</a></li>
+      <li><div class="divider"></div></li>
+      <li><a href="#!">Grade 3</a></li>
+        <li><div class="divider"></div></li>
+      <li><a href="#!">Grade 4</a></li>
+      <li><div class="divider"></div></li>
+      <li><a href="#!">Grade 5</a></li>
+        <li><div class="divider"></div></li>
+      <li><a href="#!">Grade 6</a></li>
+      <li><div class="divider"></div></li>
+      <li><a href="#!">Grade 7</a></li>
+        <li><div class="divider"></div></li>
+      <li><a href="#!">Grade 8</a></li>
+      <li><div class="divider"></div></li>
+      <li><a href="#!">Grade 9</a></li>
+        <li><div class="divider"></div></li>
+      <li><a href="#!">Grade 10</a></li>
+      <li><div class="divider"></div></li>
+      <li><a href="#!">Grade 11</a></li>
+        <li><div class="divider"></div></li>
+      <li><a href="#!">Grade 12</a></li>
+      <li><div class="divider"></div></li>
+    </ul>
+    
+
+    <div class="container">
+        <div class="row">
+            <div class="col s3" style="height:100vh">
+                <h4>Click below to create a worksheet</h4>
+                <button class="btn-large create-worksheet" id="createWorksheet">Create!</button>
+            </div>
+
+            <div class="col s9" style="height:100vh">
+                <iframe id="i" style="height:90%;width:100%"></iframe>
+            </div>
+        </div>
     </div>
-    </div>
-</div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    
+    <script src="./main.js"></script>
     <script src="./bundle.js"></script>
 </body>
+
 </html>
