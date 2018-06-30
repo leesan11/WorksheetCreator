@@ -7,16 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <link rel='stylesheet' href='./css/style.css'>
 
 </head>
 
 <body>
     <nav>
         <div class="nav-wrapper black">
-            <a href="#!" class="center brand-logo">DIY Worksheets</a>
+            <a href="#!" class="center brand-logo"><span class='title-nav' style='overflow:hidden'>DIY Worksheets</span></a>
             <ul class="left">
                 <li>
-                    <a data-target="slide-out" class="show-on-large sidenav-trigger black waves-effect waves-light btn"><i class="black material-icons">create</i></a>
+                    <a data-target="slide-out" class="show-on-large sidenav-trigger black waves-effect waves-light btn"><i class="black material-icons nav-button">create</i></a>
                 </li>
             </ul>
         </div>
@@ -57,10 +58,10 @@
               <div class="collapsible-header"><i class="material-icons">filter_drama</i>Number Sense</div>
               <div class="collapsible-body">
                   <ul>
-                    <li style="padding:5px"><button class="modal-trigger btn-floating create-worksheet black pulse" id="createWorksheet" data-target="decimal"><i class="material-icons">add</i></button><span style="font-size:20px; margin-left:10px;">Adding Fractions</span></li>
-                    <li style="padding:5px"><button class="modal-trigger btn-floating create-worksheet black pulse" id="createWorksheet" data-target="decimal"><i class="material-icons">add</i></button><span style="font-size:20px; margin-left:10px;">Subtracting Fractions</span></li>
-                    <li style="padding:5px"><button class="modal-trigger btn-floating create-worksheet black pulse" id="createWorksheet" data-target="decimal"><i class="material-icons">add</i></button><span style="font-size:20px; margin-left:10px;">Ordering Fractions</span></li>
-                    <li style="padding:5px"><button class="modal-trigger btn-floating create-worksheet black pulse" id="createWorksheet" data-target="decimal"><i class="material-icons">add</i></button><span style="font-size:20px; margin-left:10px;">Ordering Decimals</span></li>
+                    <li style="padding:5px"><button class="modal-trigger btn-floating create-worksheet black pulse" id="createWorksheet" data-target="modal" data='integer-addition'><i class="material-icons">add</i></button><span style="font-size:20px; margin-left:10px;">Adding Integers</span></li>
+                    <li style="padding:5px"><button class="modal-trigger btn-floating create-worksheet black pulse" id="createWorksheet" data-target="modal"><i class="material-icons">add</i></button><span style="font-size:20px; margin-left:10px;">Subtracting Fractions</span></li>
+                    <li style="padding:5px"><button class="modal-trigger btn-floating create-worksheet black pulse" id="createWorksheet" data-target="modal"><i class="material-icons">add</i></button><span style="font-size:20px; margin-left:10px;">Ordering Fractions</span></li>
+                    <li style="padding:5px"><button class="modal-trigger btn-floating create-worksheet black pulse" id="createWorksheet" data-target="modal" data='order-decimals'><i class="material-icons">add</i></button><span style="font-size:20px; margin-left:10px;">Ordering Decimals</span></li>
                   </ul>
                 </div>
             </li>
@@ -77,12 +78,12 @@
 
 <!--MODALS-->
 
-<div id="decimal" class="modal generate" style="height:100vh;">
+<div id="modal" class="modal generate" style="height:100vh;">
         <div class="modal-content" style="height:100%">
           <h5 style="text-align:center">New Worksheet</h5>
           <iframe style="width:100%;height:70%" id="i"></iframe>
           <p>Click below to generatee a new worksheet</p>
-            <button class="btn-small create-worksheet" id="createWorksheet">Create!</button>
+            <button class="btn-small create-worksheet regenerate">Create!</button>
         </div>
       </div>
 
