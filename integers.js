@@ -1,4 +1,4 @@
-$(".generate").addEventListener("click",".create-worksheet-integer-addition",function(){
+$(".generate").addEventListener("click",".create-worksheet-integer-subtraction",function(){
     let pdfKIT = require("pdfkit");
     let doc = new pdfKIT();
     let fs = require("fs");
@@ -13,7 +13,7 @@ function integerAdditionWorksheet(){
     //TO DO: Add to MTFTW website somehow...
     //template
     
-    template.createTitle(doc,"Adding Integers Worksheet");
+    template.createTitle(doc,"Subtracting Integers Worksheet");
     
     template.addNameDate(doc);
     //Template end
@@ -50,7 +50,7 @@ function integerAdditionWorksheet(){
     //generate random integer
     let first = Math.floor(Math.random()*100-50);
     let second = Math.floor(Math.random()*100-50);
-    let equation = first + ' + ' + second + ' = ';
+    let equation = first + ' - ' + second + ' = ';
     window.numb++;
     return  ["\n"+window.numb+") "+ equation ,createAnswer(equation)+"\n"];
     
@@ -85,7 +85,14 @@ function integerAdditionWorksheet(){
     stream.on('finish', function(){
       
       url = stream.toBlobURL('application/pdf')
-      document.getElementById("i").src=url;
+      let iframe = document.getElementById("i")
+      iframe.src = url;
+      y = (iframe.contentWindow || iframe.contentDocument);
+
+      if (!y.document.body.style.backgroundColor) {
+        y.document.body.innerHTML = "<h1 style='text-align:center'>You are using a mobile browser.</h1> <h3 style='text-align:center'>Your download should have initiated</h3>";
+        y.close();
+      }
     });
 }
     });
