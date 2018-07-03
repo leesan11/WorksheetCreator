@@ -1,24 +1,13 @@
-$(".generate").addEventListener("click",".create-worksheet-integer-subtraction",function(){
-    let pdfKIT = require("pdfkit");
-    let doc = new pdfKIT();
-    let fs = require("fs");
-    let blobStream  = require('blob-stream');
-    let template = require("./template.js");
-    window.numb=0;
-    window.store=[];
-    let stream = doc.pipe(blobStream());
-    
 function orderIntegersWorksheet(){
-    //adding content
+ //adding content
     //TO DO: Add to MTFTW website somehow...
     //template
-    
     template.createTitle(doc,"Ordering Integers Worksheet");
     
     template.addNameDate(doc);
     //Template end
     doc.fontSize(12);
-    doc.text("Order following from least to greatest: ");
+    doc.text("Order from Least to Greatest");
     for(let i=0;i<10;i++){
       appendQuestion();
     }
@@ -47,18 +36,21 @@ function orderIntegersWorksheet(){
     
     function createQuestion(){
     let arr=[];
-    //generate random integer
-    let first = Math.floor(Math.random()*100-50);
-    let second = Math.floor(Math.random()*100-50);
-    let equation = first + ' - ' + second + ' = ';
+    for(i=0;i<5;i++){
+      arr.push(Math.floor((Math.random()*100)-50));
+    }
     window.numb++;
-    return  ["\n"+window.numb+") "+ equation ,createAnswer(equation)+"\n"];
+    return  ["\n"+window.numb+") "+arr.join(" ,"),createAnswer(arr)+"\n"];
     
     }
     
-    function createAnswer(equation){
-      
-      return "Answer: " + eval(equation.substring(0,equation.length-2));
+    function createAnswer(arr){
+      let t=[];
+      for(items of arr){
+        t.push(items);
+      }
+      t.sort((a,b)=>{return b-a});
+      return "Answer: "+t.join(" ,");
     }
     
     function createAnswerKey(){
@@ -81,9 +73,7 @@ function orderIntegersWorksheet(){
    
     // finalize the PDF and end the stream
     doc.end();
-    
     stream.on('finish', function(){
-      
       url = stream.toBlobURL('application/pdf')
       let iframe = document.getElementById("i")
       iframe.src = url;
@@ -92,7 +82,7 @@ function orderIntegersWorksheet(){
       if (!y.document.body.style.backgroundColor) {
         y.document.body.innerHTML = "<h1 style='text-align:center'>You are using a mobile browser.</h1> <h3 style='text-align:center'>Your download should have initiated</h3>";
         y.close();
-      }
+      };
+
     });
 }
-    });
